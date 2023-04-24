@@ -111,14 +111,12 @@ const luminanceRemapping = (
 };
 
 const generateSamples = (imgArray, imgWidth, imgHeight, countSamples) => {
-  console.log(imgWidth, imgHeight);
   const divisor = Math.floor(Math.sqrt(countSamples));
 
   const sampleWidth = Math.floor(imgWidth / divisor);
   const sampleHeight = Math.floor(imgHeight / divisor);
 
   const samples = [];
-  console.log(divisor, sampleWidth, sampleHeight);
   for (let x = 0; x < divisor; x++) {
     for (let y = 0; y < divisor; y++) {
       const minX = x * sampleWidth;
@@ -154,7 +152,6 @@ const generateSamples = (imgArray, imgWidth, imgHeight, countSamples) => {
     }
   }
 
-  console.log(samples);
   return samples;
 };
 
@@ -167,10 +164,6 @@ const coordinateByIndex = (index, imgWidth, imgHeight) => {
   const res = indexPos / imgWidth;
   const y = Math.floor(res);
   const x = Math.round((res - y) * imgWidth);
-
-  if (index !== indexByCoordinate(x, y, imgWidth, imgHeight)) {
-    console.log(index, x, y);
-  }
 
   return { x, y };
 };
