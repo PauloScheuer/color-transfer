@@ -5,29 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="reset.css" />
     <title>Color Transfer</title>
   </head>
   <body>
-    <img
-      src="./images/source_tree.png"
-      alt="Source Image"
-      class="image"
-      id="source"
-    />
-    <img
-      src="./images/target_tree.png"
-      alt="Target Image"
-      class="image"
-      id="target"
-    />
-    <img
-      src="./images/target_tree.png"
-      alt="Result Image"
-      class="image"
-      id="result"
-    />
-
-    <canvas id="canvas" class="invisible"></canvas>
+    <div class="content">
+      <div class="image-container">
+        <img
+          src="./images/source_tree.png"
+          alt="Source Image"
+          class="image"
+          id="source"
+        />
+      </div>
+      <div class="image-container">
+        <img
+          src="./images/target_tree.png"
+          alt="Target Image"
+          class="image target"
+          id="target"
+        />
+        <canvas id="canvas" class="image result invisible"></canvas>
+        <img
+          src="./images/target_tree.png"
+          alt="Result Image"
+          class="image result"
+          id="result"
+        />
+      </div>
+    </div>
 
     <script src="script/index.js" type="module"></script>
   </body>

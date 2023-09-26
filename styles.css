@@ -1,8 +1,29 @@
-.image{
-    max-width: 300px;
-    max-height: 300px;
+.image {
+  max-width: 300px;
+  max-height: 300px;
 }
 
-.invisible{
-    display: none;
+.invisible {
+  display: none;
+}
+
+.content {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.target,
+.result {
+  position: absolute;
+  width: 100%;
 }
