@@ -23,7 +23,8 @@
 }
 
 .target,
-.result {
+.result,
+.analyze {
   position: absolute;
   width: 100%;
 }

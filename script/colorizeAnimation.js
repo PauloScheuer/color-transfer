@@ -5,8 +5,8 @@ const N_ANIMATION_POSITIONS = 4;
 const N_FULL_OPAQUE = 255;
 const N_MAX_RADIUS = 5;
 
-export const startAnimation = (resArray, resWidth, resHeight) => {
-  const canvas = document.getElementById("canvas");
+export const startColorizeAnimation = (resArray, resWidth, resHeight) => {
+  const canvas = document.getElementById("canvasColorize");
   const result = document.getElementById("result");
   const context = canvas.getContext("2d", { willReadFrequently: true });
 

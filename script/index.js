@@ -1,4 +1,5 @@
-import { startAnimation } from "./colorizeAnimation.js";
+import { startAnalyzeAnimation } from "./analyzeAnimation.js";
+import { startColorizeAnimation } from "./colorizeAnimation.js";
 import { imageRGBAtoLAB, imageLABtoRGBA } from "./colorspaces.js";
 import { coordinateByIndex, indexByCoordinate } from "./coordinate.js";
 import { randomBetween } from "./utils.js";
@@ -12,6 +13,8 @@ window.addEventListener("load", () => {
 });
 
 const executeTransfer = async () => {
+  startAnalyzeAnimation("source");
+
   const [srcArray, srcWidth, srcHeight] = await getImageProperties("source");
   const [tgtArray, tgtWidth, tgtHeight] = await getImageProperties("target");
 
@@ -49,8 +52,12 @@ const executeTransfer = async () => {
   writeResult(tgtArrayColoredRGB, tgtWidth, tgtHeight);
 };
 
+const writeResult = (resArray, resWidth, resHeight) => {
+  startColorizeAnimation(resArray, resWidth, resHeight);
+};
+
 const getImageProperties = async (id) => {
-  const canvas = document.getElementById("canvas");
+  const canvas = document.getElementById("canvasColorize");
   const context = canvas.getContext("2d", { willReadFrequently: true });
 
   const imgElement = document.getElementById(id);
@@ -69,10 +76,6 @@ const getImageProperties = async (id) => {
   const imgHeight = imgData.height;
 
   return [imgArray, imgWidth, imgHeight];
-};
-
-const writeResult = (resArray, resWidth, resHeight) => {
-  startAnimation(resArray, resWidth, resHeight);
 };
 
 const getLuminanceProperties = (src) => {
