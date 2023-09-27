@@ -134,6 +134,11 @@ const LABToXYZ = (L, A, B) => {
   return [X, Y, Z];
 };
 
+const LABToRGB = (l, a, b) => {
+  const [x, y, z] = LABToXYZ(l, a, b);
+  return XYZToRGB(x, y, z);
+};
+
 const imageRGBAtoLAB = (srcArray) => {
   const resArray = [];
 
@@ -187,4 +192,20 @@ const imageLABtoRGBA = (srcArray, alpha = 255) => {
   return resArray;
 };
 
-export { imageRGBAtoLAB, imageLABtoRGBA };
+const RGBToHex = (r, g, b) => {
+  const roundedRed = Math.round(r);
+  const roundedGreen = Math.round(g);
+  const roundedBlue = Math.round(b);
+
+  const clampedRed = Math.max(Math.min(roundedRed, 255), 0);
+  const clampedGreen = Math.max(Math.min(roundedGreen, 255), 0);
+  const clampedBlue = Math.max(Math.min(roundedBlue, 255), 0);
+
+  const hexRed = clampedRed.toString(16).padStart(2, "0");
+  const hexGreen = clampedGreen.toString(16).padStart(2, "0");
+  const hexBlue = clampedBlue.toString(16).padStart(2, "0");
+
+  return `#${hexRed}${hexGreen}${hexBlue}`;
+};
+
+export { imageRGBAtoLAB, imageLABtoRGBA, LABToRGB, RGBToHex };

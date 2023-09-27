@@ -1,15 +1,21 @@
 import { startAnalyzeAnimation } from "./analyzeAnimation.js";
 import { startColorizeAnimation } from "./colorizeAnimation.js";
-import { imageRGBAtoLAB, imageLABtoRGBA } from "./colorspaces.js";
+import {
+  imageRGBAtoLAB,
+  imageLABtoRGBA,
+  LABToRGB,
+  RGBToHex,
+} from "./colorspaces.js";
 import { coordinateByIndex, indexByCoordinate } from "./coordinate.js";
+import { startTransferAnimation } from "./transferAnimation.js";
 import { randomBetween } from "./utils.js";
 
-const N_SAMPLES_FULL_IMAGE = 10;
+const N_SAMPLES_FULL_IMAGE = 200;
 const N_OFFSET_DEVIATION = 2;
 
-window.addEventListener("load", () => {
-  const transferButton = document.getElementById("transferButton");
-  transferButton.addEventListener("click", executeTransfer);
+window.addEventListener("load", async () => {
+  const executeButton = document.getElementById("execute");
+  executeButton.addEventListener("click", () => executeTransfer());
 });
 
 const executeTransfer = async () => {
@@ -49,10 +55,12 @@ const executeTransfer = async () => {
   );
 
   const tgtArrayColoredRGB = imageLABtoRGBA(tgtArrayColoredLAB, 0);
-  writeResult(tgtArrayColoredRGB, tgtWidth, tgtHeight);
+
+  writeResult(tgtArrayColoredRGB, tgtWidth, tgtHeight, srcArraySamples);
 };
 
-const writeResult = (resArray, resWidth, resHeight) => {
+const writeResult = (resArray, resWidth, resHeight, samplesArray) => {
+  startTransferAnimation(samplesArray);
   startColorizeAnimation(resArray, resWidth, resHeight);
 };
 

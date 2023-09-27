@@ -1,6 +1,7 @@
 export const startAnalyzeAnimation = (id) => {
   const result = document.getElementById("result");
   result.removeAttribute("src");
+  result.classList.add("invisible");
 
   const canvas = document.getElementById("canvasAnalyze");
   canvas.classList.remove("invisible");
@@ -13,10 +14,10 @@ export const startAnalyzeAnimation = (id) => {
   canvas.width = imgRect.width;
   canvas.height = imgRect.height;
 
-  animate(0, canvas, context);
+  animate(0, canvas, context, Date.now());
 };
 
-const animate = (curY, canvas, context) => {
+const animate = (curY, canvas, context, start) => {
   requestAnimationFrame(() => {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -28,14 +29,13 @@ const animate = (curY, canvas, context) => {
     context.stroke();
 
     if (curY < canvas.height) {
-      animate(curY + 4, canvas, context);
-    } else if (!shouldEndAnimation()) {
-      animate(0, canvas, context);
+      animate(curY + 4, canvas, context, start);
+    } else if (!shouldEndAnimation(start)) {
+      animate(0, canvas, context, start);
     }
   });
 };
 
-const shouldEndAnimation = () => {
-  const result = document.getElementById("result");
-  return result.src !== "";
+const shouldEndAnimation = (start) => {
+  return Date.now() - start >= 2000;
 };

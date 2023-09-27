@@ -12,14 +12,15 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
+  background-color: #e0e0e0;
 }
 
 .image-container {
-  width: 400px;
-  height: 400px;
+  width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
 }
 
 .target,

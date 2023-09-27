@@ -1,9 +1,9 @@
 import { coordinateByIndex, indexByCoordinate } from "./coordinate.js";
 import { randomBetween } from "./utils.js";
 
-const N_ANIMATION_POSITIONS = 4;
+const N_ANIMATION_POSITIONS = 1;
 const N_FULL_OPAQUE = 255;
-const N_MAX_RADIUS = 5;
+const N_MAX_RADIUS = 4;
 
 export const startColorizeAnimation = (resArray, resWidth, resHeight) => {
   const canvas = document.getElementById("canvasColorize");
@@ -49,16 +49,14 @@ const animate = (
       canvas.classList.add("invisible");
       result.classList.remove("invisible");
     } else {
-      requestAnimationFrame(() =>
-        animate(
-          resArray,
-          resWidth,
-          resHeight,
-          positions,
-          canvas,
-          context,
-          result
-        )
+      animate(
+        resArray,
+        resWidth,
+        resHeight,
+        positions,
+        canvas,
+        context,
+        result
       );
     }
   });
