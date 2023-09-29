@@ -13,9 +13,6 @@ export const startColorizeAnimation = (resArray, resWidth, resHeight) => {
   canvas.width = resWidth;
   canvas.height = resHeight;
 
-  canvas.classList.remove("invisible");
-  result.classList.add("invisible");
-
   const positions = [];
   animate(resArray, resWidth, resHeight, positions, canvas, context, result);
 };
@@ -31,7 +28,7 @@ const animate = (
 ) => {
   requestAnimationFrame(() => {
     positions = [
-      ...startOpacity(resArray),
+      ...startOpacity(resArray, resWidth, resHeight),
       ...spreadOpacity(resArray, positions, resWidth, resHeight),
     ];
 
@@ -45,9 +42,12 @@ const animate = (
     });
 
     if (allColorized) {
-      result.src = canvas.toDataURL();
-      canvas.classList.add("invisible");
-      result.classList.remove("invisible");
+      result.src = "";
+      window.setTimeout(() => {
+        result.src = canvas.toDataURL();
+        canvas.classList.add("invisible");
+        result.classList.remove("invisible");
+      }, 1000);
     } else {
       animate(
         resArray,
@@ -62,18 +62,19 @@ const animate = (
   });
 };
 
-const getPositions = (count, max) => {
+const getPositions = (count, width, height) => {
   const arr = new Array(count);
   for (let i = 0; i < count; i++) {
-    const random = randomBetween(0, max);
-    arr[i] = Math.floor(random / 4) * 4 + 3;
+    const x = randomBetween(0, width / 5);
+    const y = randomBetween(height / 2 - height / 5, height / 2 + height / 5);
+    arr[i] = indexByCoordinate(x, y, width, height, true);
   }
   return arr;
 };
 
 const getAroundIndexes = (baseIndex, imgWidth, imgHeight) => {
   const baseCoordinate = coordinateByIndex(
-    baseIndex - 3,
+    baseIndex,
     imgWidth,
     imgHeight,
     true
@@ -106,14 +107,18 @@ const getAroundIndexes = (baseIndex, imgWidth, imgHeight) => {
   }
 
   const aroundIndexes = aroundCoordinates.map((coord) => {
-    return indexByCoordinate(coord.x, coord.y, imgWidth, imgHeight, true) + 3;
+    return indexByCoordinate(coord.x, coord.y, imgWidth, imgHeight, true);
   });
 
   return aroundIndexes;
 };
 
-const startOpacity = (array) => {
-  const opaquePositions = getPositions(N_ANIMATION_POSITIONS, array.length);
+const startOpacity = (array, imgWidth, imgHeight) => {
+  const opaquePositions = getPositions(
+    N_ANIMATION_POSITIONS,
+    imgWidth,
+    imgHeight
+  );
   opaquePositions.forEach((index) => {
     array[index] = N_FULL_OPAQUE;
   });
@@ -126,8 +131,8 @@ const spreadOpacity = (array, positions, imgWidth, imgHeight) => {
   positions.forEach((position) => {
     const aroundPositions = getAroundIndexes(position, imgWidth, imgHeight);
     aroundPositions.forEach((aroundPosition) => {
-      if (array[aroundPosition] !== N_FULL_OPAQUE) {
-        array[aroundPosition] = N_FULL_OPAQUE;
+      if (array[aroundPosition + 3] !== N_FULL_OPAQUE) {
+        array[aroundPosition + 3] = N_FULL_OPAQUE;
         newPositions.push(aroundPosition);
       }
     });

@@ -16,6 +16,7 @@ const N_OFFSET_DEVIATION = 2;
 window.addEventListener("load", async () => {
   const executeButton = document.getElementById("execute");
   executeButton.addEventListener("click", () => executeTransfer());
+  executeTransfer();
 });
 
 const executeTransfer = async () => {
@@ -60,8 +61,17 @@ const executeTransfer = async () => {
 };
 
 const writeResult = (resArray, resWidth, resHeight, samplesArray) => {
-  startTransferAnimation(samplesArray);
-  startColorizeAnimation(resArray, resWidth, resHeight);
+  const canvas = document.getElementById("canvasColorize");
+  const result = document.getElementById("result");
+
+  canvas.classList.remove("invisible");
+  result.classList.add("invisible");
+  result.removeAttribute("src");
+
+  const callBack = () => startColorizeAnimation(resArray, resWidth, resHeight);
+  startTransferAnimation(samplesArray, callBack);
+
+  window.addEventListener("colorize", callBack);
 };
 
 const getImageProperties = async (id) => {
