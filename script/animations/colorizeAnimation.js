@@ -1,5 +1,5 @@
-import { coordinateByIndex, indexByCoordinate } from "./coordinate.js";
-import { randomBetween } from "./utils.js";
+import { coordinateByIndex, indexByCoordinate } from "../coordinate.js";
+import { randomBetween } from "../utils.js";
 
 const N_ANIMATION_POSITIONS = 1;
 const N_FULL_OPAQUE = 255;

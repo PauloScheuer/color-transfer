@@ -1,5 +1,5 @@
-import { LABToRGB, RGBToHex } from "./colorspaces.js";
-import { randomBetween } from "./utils.js";
+import { LABToRGB, RGBToHex } from "../colorspaces.js";
+import { randomBetween } from "../utils.js";
 
 export const startTransferAnimation = (arrSamples, callBack) => {
   const canvas = document.getElementById("canvasTransfer");
