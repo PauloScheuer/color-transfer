@@ -4,6 +4,7 @@ import { randomBetween } from "../utils.js";
 const N_ANIMATION_POSITIONS = 1;
 const N_FULL_OPAQUE = 255;
 const N_MAX_RADIUS = 4;
+const N_MAX_DURATION = 20_000;
 
 export const startColorizeAnimation = (
   resArray,
@@ -27,7 +28,8 @@ export const startColorizeAnimation = (
     canvas,
     context,
     result,
-    callBack
+    callBack,
+    Date.now()
   );
 };
 
@@ -39,7 +41,8 @@ const animate = (
   canvas,
   context,
   result,
-  callBack
+  callBack,
+  startTime
 ) => {
   requestAnimationFrame(() => {
     positions = [
@@ -48,6 +51,10 @@ const animate = (
     ];
 
     context.putImageData(new ImageData(resArray, resWidth, resHeight), 0, 0);
+
+    if (Date.now() - startTime >= N_MAX_DURATION) {
+      finishAnimation(resArray);
+    }
 
     const allColorized = resArray.every((item, index) => {
       if ((index + 1) % 4 === 0) {
@@ -73,7 +80,8 @@ const animate = (
         canvas,
         context,
         result,
-        callBack
+        callBack,
+        startTime
       );
     }
   });
@@ -155,4 +163,10 @@ const spreadOpacity = (array, positions, imgWidth, imgHeight) => {
     });
   });
   return newPositions;
+};
+
+const finishAnimation = (array) => {
+  for (let i = 3; i < array.length; i += 4) {
+    array[i] = N_FULL_OPAQUE;
+  }
 };
