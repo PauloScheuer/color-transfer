@@ -1,6 +1,7 @@
 .image {
   max-width: 300px;
   max-height: 300px;
+  pointer-events: none;
 }
 
 .invisible {
@@ -16,14 +17,17 @@
 }
 
 .image-container {
-  width: 300px;
+  width: 400px;
+  height: 400px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: white;
+  border-radius: 5px;
+  position: relative;
 }
 
-.target,
 .result,
 .analyze {
   position: absolute;

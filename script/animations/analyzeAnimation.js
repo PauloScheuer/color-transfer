@@ -35,12 +35,16 @@ const animate = (curY, canvas, context, bInc) => {
         animate(curY + N_INC, canvas, context, bInc);
       } else if (!shouldEndAnimation()) {
         animate(canvas.height, canvas, context, false);
+      } else {
+        context.clearRect(0, 0, canvas.width, canvas.height);
       }
     } else {
       if (curY > 0) {
         animate(curY - N_INC, canvas, context, bInc);
       } else if (!shouldEndAnimation()) {
         animate(0, canvas, context, true);
+      } else {
+        context.clearRect(0, 0, canvas.width, canvas.height);
       }
     }
   });
