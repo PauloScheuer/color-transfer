@@ -4,6 +4,12 @@ body {
   font-family: "Roboto", cursive;
 }
 
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
 .image {
   max-width: 350px;
   max-height: 300px;
@@ -13,18 +19,53 @@ body {
   display: none;
 }
 
-.content {
+.title-container {
+  height: 80px;
+  width: 100%;
+  background-color: white;
   display: flex;
-  height: 100vh;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  z-index: 2;
+  border-radius: 0px 0px 12px 12px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  background-color: black;
+  background-image: linear-gradient(
+    to right,
+    #4169e1,
+    #40e0d0,
+    #ffd700,
+    #ffa500,
+    #ff69b4
+  );
+  background-size: 100%;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   background-color: white;
+  position: relative;
 }
 
 .content::before {
   content: "";
   position: absolute;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background-image: linear-gradient(
     to right,
@@ -111,7 +152,6 @@ body {
 
 .control-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 300px;
@@ -123,5 +163,34 @@ body {
 .transfer {
   position: absolute;
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
+}
+
+@media (max-width: 840px) {
+  html,
+  body {
+    height: auto;
+    min-height: 100%;
+  }
+
+  .content {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: start;
+  }
+
+  .source-container {
+    margin-top: 100px;
+  }
+
+  .control-container {
+    height: auto;
+    padding-bottom: 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .target-container {
+    margin-bottom: 20px;
+  }
 }

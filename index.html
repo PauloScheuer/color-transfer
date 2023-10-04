@@ -9,8 +9,11 @@
     <title>Color Transfer</title>
   </head>
   <body>
+    <header class="title-container">
+      <h1 class="title">Color Transfer</h1>
+    </header>
     <div class="content">
-      <div class="image-container" id="sourceContainer">
+      <div class="image-container source-container" id="sourceContainer">
         <div class="content-container">
           <span id="sourceMissing">No image selected</span>
           <img alt="Source Image" class="image invisible" id="source" />
@@ -40,7 +43,7 @@
           height="200"
         ></canvas>
       </div>
-      <div class="image-container" id="targetContainer">
+      <div class="image-container target-container" id="targetContainer">
         <div class="content-container">
           <span id="targetMissing">No image selected</span>
           <img alt="Target Image" class="image target invisible" id="target" />

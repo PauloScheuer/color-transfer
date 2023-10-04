@@ -90,8 +90,15 @@ const animate = (
 const getPositions = (count, width, height) => {
   const arr = new Array(count);
   for (let i = 0; i < count; i++) {
-    const x = randomBetween(0, width / 5);
-    const y = randomBetween(height / 2 - height / 5, height / 2 + height / 5);
+    let x;
+    let y;
+    if (document.documentElement.scrollWidth > 840) {
+      x = randomBetween(0, width / 5);
+      y = randomBetween(height / 2 - height / 5, height / 2 + height / 5);
+    } else {
+      x = randomBetween(width / 2 - width / 5, width / 2 + width / 5);
+      y = randomBetween(0, height / 5);
+    }
     arr[i] = indexByCoordinate(x, y, width, height, true) + 3;
   }
   return arr;

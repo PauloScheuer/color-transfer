@@ -114,11 +114,19 @@ const positionTransfer = () => {
     .getElementById("controlContainer")
     .getBoundingClientRect();
 
-  const x = source.x + source.width - container.x;
-  const width = target.x - (source.x + source.width);
+  if (document.documentElement.scrollWidth > 840) {
+    const x = source.x + source.width - container.x;
+    const width = target.x - (source.x + source.width);
 
-  canvas.style.left = x + "px";
-  canvas.width = width;
+    canvas.style.left = x + "px";
+    canvas.width = width;
+  } else {
+    const y = source.y + source.height - container.y;
+    const height = target.y - (source.y + source.height);
+
+    canvas.style.top = y + "px";
+    canvas.height = height;
+  }
 };
 
 const positionResult = () => {
