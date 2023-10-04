@@ -21,12 +21,16 @@ window.addEventListener("load", async () => {
 
   const clearTarget = document.getElementById("targetClear");
   clearTarget.addEventListener("click", () => resetImage("target"));
+
+  const saveResult = document.getElementById("resultSave");
+  saveResult.addEventListener("click", () => downloadImage("result"));
 });
 
 const executeTransfer = async () => {
   positionAnalyze();
   startAnalyzeAnimation("source");
   toggleCanTransfer(false);
+  toggleCanSave(false);
 
   const colorizeWorker = new Worker("script/colorize.js", { type: "module" });
 
@@ -46,6 +50,7 @@ const executeTransfer = async () => {
 
 const finishWrite = () => {
   toggleCanTransfer(true);
+  toggleCanSave(true);
 };
 
 const getImageProperties = async (id) => {
@@ -145,6 +150,7 @@ const hideResult = () => {
 };
 
 const changeImage = (event, type) => {
+  toggleCanSave(false);
   hideResult();
 
   const file = event.target.files[0];
@@ -181,7 +187,16 @@ const resetImage = (type) => {
   const labelMissing = document.getElementById(type + "Missing");
   labelMissing.classList.remove("invisible");
 
-  checkIfCanTransfer();
+  toggleCanTransfer(false);
+  toggleCanSave(false);
+};
+
+const downloadImage = (name) => {
+  const image = document.getElementById(name);
+  const el = document.getElementById("download");
+
+  el.href = image.src;
+  el.click();
 };
 
 const checkIfCanTransfer = () => {
@@ -203,4 +218,10 @@ const toggleCanTransfer = (bCanTransfer) => {
   const transferButton = document.getElementById("execute");
 
   transferButton.toggleAttribute("disabled", !bCanTransfer);
+};
+
+const toggleCanSave = (bCanSave) => {
+  const saveButton = document.getElementById("resultSave");
+
+  saveButton.toggleAttribute("disabled", !bCanSave);
 };
