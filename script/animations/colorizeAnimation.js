@@ -5,7 +5,12 @@ const N_ANIMATION_POSITIONS = 1;
 const N_FULL_OPAQUE = 255;
 const N_MAX_RADIUS = 4;
 
-export const startColorizeAnimation = (resArray, resWidth, resHeight) => {
+export const startColorizeAnimation = (
+  resArray,
+  resWidth,
+  resHeight,
+  callBack
+) => {
   const canvas = document.getElementById("canvasColorize");
   const result = document.getElementById("result");
   const context = canvas.getContext("2d", { willReadFrequently: true });
@@ -14,7 +19,16 @@ export const startColorizeAnimation = (resArray, resWidth, resHeight) => {
   canvas.height = resHeight;
 
   const positions = [];
-  animate(resArray, resWidth, resHeight, positions, canvas, context, result);
+  animate(
+    resArray,
+    resWidth,
+    resHeight,
+    positions,
+    canvas,
+    context,
+    result,
+    callBack
+  );
 };
 
 const animate = (
@@ -24,7 +38,8 @@ const animate = (
   positions,
   canvas,
   context,
-  result
+  result,
+  callBack
 ) => {
   requestAnimationFrame(() => {
     positions = [
@@ -47,6 +62,7 @@ const animate = (
         result.src = canvas.toDataURL();
         canvas.classList.add("invisible");
         result.classList.remove("invisible");
+        callBack();
       }, 1000);
     } else {
       animate(
@@ -56,7 +72,8 @@ const animate = (
         positions,
         canvas,
         context,
-        result
+        result,
+        callBack
       );
     }
   });

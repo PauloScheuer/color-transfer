@@ -33,3 +33,31 @@
   position: absolute;
   width: 100%;
 }
+
+.execute {
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  background-color: white;
+  transition: 0.5s;
+}
+
+.execute:hover {
+  background-color: black;
+  color: white;
+}
+
+.execute:disabled {
+  background-color: grey;
+  border-color: grey;
+  color: white;
+  cursor: default;
+}
+
+.control-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

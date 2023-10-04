@@ -26,6 +26,7 @@ window.addEventListener("load", async () => {
 const executeTransfer = async () => {
   positionAnalyze();
   startAnalyzeAnimation("source");
+  toggleCanTransfer(false);
 
   const colorizeWorker = new Worker("script/colorize.js", { type: "module" });
 
@@ -41,6 +42,10 @@ const executeTransfer = async () => {
     const { imgData, imgWidth, imgHeight, arrSamples } = e.data;
     writeResult(imgData, imgWidth, imgHeight, arrSamples);
   };
+};
+
+const finishWrite = () => {
+  toggleCanTransfer(true);
 };
 
 const getImageProperties = async (id) => {
@@ -75,7 +80,8 @@ const writeResult = (resArray, resWidth, resHeight, samplesArray) => {
 
   positionResult();
 
-  const callBack = () => startColorizeAnimation(resArray, resWidth, resHeight);
+  const callBack = () =>
+    startColorizeAnimation(resArray, resWidth, resHeight, finishWrite);
   startTransferAnimation(samplesArray, callBack);
 
   window.addEventListener("colorize", callBack);
@@ -135,6 +141,8 @@ const changeImage = (event, type) => {
 
     const labelMissing = document.getElementById(type + "Missing");
     labelMissing.classList.add("invisible");
+
+    checkIfCanTransfer();
   };
 
   fileReader.onerror = () => {
@@ -148,7 +156,7 @@ const resetImage = (type) => {
   hideResult();
 
   const img = document.getElementById(type);
-  img.src = "";
+  img.removeAttribute("src");
   img.classList.add("invisible");
 
   const select = document.getElementById(type + "Select");
@@ -156,4 +164,27 @@ const resetImage = (type) => {
 
   const labelMissing = document.getElementById(type + "Missing");
   labelMissing.classList.remove("invisible");
+
+  checkIfCanTransfer();
+};
+
+const checkIfCanTransfer = () => {
+  const imgSource = document.getElementById("source");
+  const imgTarget = document.getElementById("target");
+
+  const transferButton = document.getElementById("execute");
+
+  const bCanTransfer =
+    imgSource.src &&
+    imgSource.src !== "" &&
+    imgTarget.src &&
+    imgTarget.src !== "";
+
+  transferButton.toggleAttribute("disabled", !bCanTransfer);
+};
+
+const toggleCanTransfer = (bCanTransfer) => {
+  const transferButton = document.getElementById("execute");
+
+  transferButton.toggleAttribute("disabled", !bCanTransfer);
 };
