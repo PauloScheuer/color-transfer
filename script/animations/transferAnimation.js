@@ -26,10 +26,8 @@ const animate = (canvas, arrSamples, arrItems, callBack, bCanDispatch) => {
 
     const bShouldStop = shouldStop();
     if (bShouldStop) {
-      arrItems.splice(0, 5);
-      window.removeEventListener("colorize", callBack);
-
-      if (arrItems.length === 0) {
+      if (arrItems[arrItems.length - 1].x >= canvas.width) {
+        window.removeEventListener("colorize", callBack);
         return;
       }
     } else {
