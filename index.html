@@ -4,28 +4,61 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Color Transfer</title>
   </head>
   <body>
     <div class="content">
       <div class="image-container" id="sourceContainer">
-        <span id="sourceMissing">No image selected</span>
-        <img alt="Source Image" class="image invisible" id="source" />
-        <input type="file" id="sourceSelect" accept="image/*" />
-        <button id="sourceClear">Clear selection</button>
-        <canvas id="canvasAnalyze" class="image analyze invisible"></canvas>
+        <div class="content-container">
+          <span id="sourceMissing">No image selected</span>
+          <img alt="Source Image" class="image invisible" id="source" />
+          <canvas id="canvasAnalyze" class="image analyze invisible"></canvas>
+        </div>
+        <div class="buttons-container">
+          <label for="sourceSelect" class="action-button"
+            >Select source image</label
+          >
+          <input
+            type="file"
+            id="sourceSelect"
+            accept="image/*"
+            class="invisible"
+          />
+          <button id="sourceClear" class="action-button">
+            Clear selection
+          </button>
+        </div>
       </div>
-      <div class="control-container">
-        <button id="execute" class="execute" disabled>Transfer</button>
-        <canvas id="canvasTransfer" width="100" height="80"></canvas>
+      <div class="control-container" id="controlContainer">
+        <button id="execute" class="action-button" disabled>Transfer</button>
+        <canvas
+          id="canvasTransfer"
+          class="transfer"
+          width="100"
+          height="200"
+        ></canvas>
       </div>
       <div class="image-container" id="targetContainer">
-        <span id="targetMissing">No image selected</span>
-        <img alt="Target Image" class="image target invisible" id="target" />
-        <input type="file" id="targetSelect" accept="image/*" />
-        <button id="targetClear">Clear selection</button>
+        <div class="content-container">
+          <span id="targetMissing">No image selected</span>
+          <img alt="Target Image" class="image target invisible" id="target" />
+        </div>
+        <div class="buttons-container">
+          <label for="targetSelect" class="action-button"
+            >Select target image</label
+          >
+          <input
+            type="file"
+            id="targetSelect"
+            accept="image/*"
+            class="invisible"
+          />
+          <button id="targetClear" class="action-button">
+            Clear selection
+          </button>
+        </div>
         <canvas id="canvasColorize" class="image result invisible"></canvas>
         <img alt="Result Image" class="image result invisible" id="result" />
       </div>

@@ -78,6 +78,7 @@ const writeResult = (resArray, resWidth, resHeight, samplesArray) => {
   result.classList.add("invisible");
   result.removeAttribute("src");
 
+  positionTransfer();
   positionResult();
 
   const callBack = () =>
@@ -88,16 +89,31 @@ const writeResult = (resArray, resWidth, resHeight, samplesArray) => {
 };
 
 const positionAnalyze = () => {
-  const source = document.getElementById("source");
-  const sourceContainer = document.getElementById("sourceContainer");
+  const source = document.getElementById("source").getBoundingClientRect();
+  const sourceContainer = document
+    .getElementById("sourceContainer")
+    .getBoundingClientRect();
 
-  const y =
-    source.getBoundingClientRect().y -
-    sourceContainer.getBoundingClientRect().y;
+  const y = source.y - sourceContainer.y;
 
   const canvas = document.getElementById("canvasAnalyze");
 
   canvas.style.top = y + "px";
+};
+
+const positionTransfer = () => {
+  const canvas = document.getElementById("canvasTransfer");
+  const source = document.getElementById("source").getBoundingClientRect();
+  const target = document.getElementById("target").getBoundingClientRect();
+  const container = document
+    .getElementById("controlContainer")
+    .getBoundingClientRect();
+
+  const x = source.x + source.width - container.x;
+  const width = target.x - (source.x + source.width);
+
+  canvas.style.left = x + "px";
+  canvas.width = width;
 };
 
 const positionResult = () => {

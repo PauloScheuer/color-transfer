@@ -39,7 +39,7 @@ const animate = (canvas, arrSamples, arrItems, callBack, bCanDispatch) => {
         const rgbColor = LABToRGB(labColor.L, labColor.a, labColor.b);
         const hexColor = RGBToHex(rgbColor[0], rgbColor[1], rgbColor[2]);
 
-        const posY = randomBetween(20, canvas.height - 20);
+        const posY = randomBetween(130, canvas.height - 130);
 
         arrItems.push({ x: 0, y: posY, color: hexColor });
       }

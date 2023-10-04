@@ -1,7 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Rubik+Vinyl&display=swap");
+
+body {
+  font-family: "Roboto", cursive;
+}
+
 .image {
-  max-width: 300px;
+  max-width: 350px;
   max-height: 300px;
-  pointer-events: none;
 }
 
 .invisible {
@@ -13,44 +18,87 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: #e0e0e0;
+  background-color: white;
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(
+    to right,
+    #4169e1,
+    #40e0d0,
+    #ffd700,
+    #ffa500,
+    #ff69b4
+  );
+  opacity: 0.6;
 }
 
 .image-container {
-  width: 400px;
+  width: 350px;
   height: 400px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: white;
   border-radius: 5px;
   position: relative;
 }
 
+.content-container {
+  height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons-container {
+  border-top: 2px solid #4169e1;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .result,
 .analyze {
   position: absolute;
+}
+
+.result {
   width: 100%;
 }
 
-.execute {
-  padding: 8px;
-  border: 1px solid black;
-  border-radius: 5px;
-  color: black;
-  background-color: white;
-  transition: 0.5s;
+.analyze {
+  pointer-events: none;
 }
 
-.execute:hover {
-  background-color: black;
+.action-button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #4169e1;
+  color: #4169e1;
+  background-color: white;
+  transition: 0.5s;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.action-button:hover {
+  cursor: pointer;
+  background-color: #4169e1;
   color: white;
 }
 
-.execute:disabled {
-  background-color: grey;
-  border-color: grey;
+.action-button:disabled {
+  background-color: #cccccc;
+  border-color: #cccccc;
   color: white;
   cursor: default;
 }
@@ -60,4 +108,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 300px;
+  padding-bottom: 100px;
+  width: 100px;
+  position: relative;
+}
+
+.transfer {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
 }
