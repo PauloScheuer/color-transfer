@@ -50,11 +50,11 @@ const animate = (
       ...spreadOpacity(resArray, positions, resWidth, resHeight),
     ];
 
-    context.putImageData(new ImageData(resArray, resWidth, resHeight), 0, 0);
-
     if (Date.now() - startTime >= N_MAX_DURATION) {
       finishAnimation(resArray);
     }
+
+    context.putImageData(new ImageData(resArray, resWidth, resHeight), 0, 0);
 
     const allColorized = resArray.every((item, index) => {
       if ((index + 1) % 4 === 0) {
@@ -92,7 +92,7 @@ const getPositions = (count, width, height) => {
   for (let i = 0; i < count; i++) {
     const x = randomBetween(0, width / 5);
     const y = randomBetween(height / 2 - height / 5, height / 2 + height / 5);
-    arr[i] = indexByCoordinate(x, y, width, height, true);
+    arr[i] = indexByCoordinate(x, y, width, height, true) + 3;
   }
   return arr;
 };
