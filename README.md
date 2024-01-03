@@ -1,5 +1,8 @@
 # color-transfer
-Color transfer from a colorized image to a black and white one
+
+Color transfer from a colorized image to a black and white one.
+
+Inspired by the work described in the paper "Transferring Color to Greyscale Images", by Tomihisa Welsh, Michael Ashikhmin, Klaus Mueller.
 
 ## How to use:
 
